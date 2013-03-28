@@ -1,4 +1,9 @@
-import web
+#!/usr/bin/python
+
+import web,sys
+sys.path.append("server")
+sys.path.append("api")
+sys.path.append("parser")
 
 from hello import *
 from bbsuser import *
