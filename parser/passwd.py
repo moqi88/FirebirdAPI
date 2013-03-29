@@ -39,7 +39,11 @@ def getUsers():
 	
 def getAttr(id,attr):
 	b = _getBlockById(id)
+	if not b:
+		return False
 	i = _getUserFullInfoFromBlock(b)
+	if attr not in i.keys():
+		return False
 	return i[attr]
 
 def checkPasswd(id,password):
