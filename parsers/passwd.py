@@ -17,6 +17,8 @@
 import struct,os
 import sys,functions
 
+from PERM import *
+
 passwdfile	=	"/home/bbs/bbshome/.PASSWDS"
 whereischk	=	os.path.split(os.path.realpath(__file__))[0] + "/checkPasswd"
 structlen 	=	512
