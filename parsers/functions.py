@@ -32,6 +32,9 @@ def filterCT(strin):
 def GBK2UTF(strin):
 	return strin.decode("GBK").encode("utf8")
 
+def GBK2UnicodeEscape(strin):
+	return strin.decode("GBK").encode("unicode_escape")
+
 def prettyPrint(l,prefix=0,firstWithPrefix=False,linewidth=78,end=False):
 	ret = ""
 	if isinstance(l,dict):
