@@ -18,7 +18,7 @@ import struct,os
 import sys,functions
 
 passwdfile	=	"/home/bbs/bbshome/.PASSWDS"
-whereischk	=	"low/checkPasswd"
+whereischk	=	os.path.split(os.path.realpath(__file__))[0] + "/checkPasswd"
 structlen 	=	512
 maxidlen	=	14
 order	=	[	"userid",	"firstlogin",	"lasthost",	"numlogins",	"medals",	"money",	"inbank",	"banktime",		"flags",	"passwd",	"username",	"ident",	"termtype",	"reginfo",	"userlevel",	"lastlogin",	"lastlogout",	"stay",		"realname",	"address",	"email",	"nummails",	"lastjustify",	"gender",	"birthyear",	"birthmonth",	"birthday",	"signature",	"userdefine",	"notedate",	"noteline"	]
@@ -37,7 +37,7 @@ def getUsers():
 	f.close()
 	return users
 	
-def getAttr(id,attr):
+def getAttr(id = "*#06#",attr = "*#06#"):
 	b = _getBlockById(id)
 	if not b:
 		return False
@@ -46,11 +46,13 @@ def getAttr(id,attr):
 		return False
 	return i[attr]
 
-def checkPasswd(id,password):
+def checkPasswd(id="*#06#",password="*#06#"):
 	if not (id in getUsers()):
 		return False 
 	encrypted = getAttr(id,"passwd")[-13:]
-	check = os.popen(whereischk +" '" + password[0:8] + "' " + encrypted).readlines()
+	cmd = whereischk +" '" + password[0:8] + "' " + encrypted
+	print cmd
+	check = os.popen(cmd).readlines()
 	return check[0] == "1"
 
 def _getIdFromBlock(block):

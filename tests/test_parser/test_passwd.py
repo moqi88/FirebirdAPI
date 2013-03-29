@@ -154,3 +154,15 @@ def test_getAttr():
 		somethingelse = passwd.getAttr(u,"somethingelse")
 		assert somethingelse == False	
 
+def test_checkPasswd():
+	id = "someone not in list"
+	assert not passwd.checkPasswd(id,"passwd")
+
+	id = "FirebirdAPI"
+	assert not passwd.checkPasswd(id,"incorrectpasswd")
+	
+	id = "FirebirdAPI"
+	assert passwd.checkPasswd(id,"Firebird")
+	
+
+

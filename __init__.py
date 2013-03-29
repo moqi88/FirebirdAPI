@@ -1,1 +1,1 @@
-__all__ = ['api', 'parser','server','test']
+__all__ = ['apis', 'parsers','servers','tests']
