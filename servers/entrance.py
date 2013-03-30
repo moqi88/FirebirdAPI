@@ -10,10 +10,14 @@ sys.path.append("servers")
 
 from mimerenderheader import *
 from bbsuser import bbsuser
+from bbsallusers import bbsallusers
+from bbscheck import bbscheck
 
 
 urls = (
 	'/bbsuser.*','bbsuser',
+	'/bbsallusers.*','bbsallusers',
+	'/bbscheck.*','bbscheck',
 	'/(.*)', 'greet'
 )
 app = web.application(urls, globals())

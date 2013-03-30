@@ -18,6 +18,8 @@ render_txt = lambda message: message
 
 
 errors = {
+	"no_error"	:{"no":0,"error":""},
+
 	"wrong_passwd"	:{"no":1001,"error":"invalid username or passwd"},
 	"wrong_id"	:{"no":1002,"error":"invalid user"},
 
