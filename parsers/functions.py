@@ -24,6 +24,22 @@ def parseStruct(lstruct,lorder,structsize,strin):
 		itr += structsize
 	return l
 
+def packStruct(ldata,lorder,structsize):
+	for i in range(len(ldata)):
+		if type(ldata[i]) == str:
+			try:
+				ldata[i] = ldata[i].decode("utf8")
+			except:
+				pass
+			try:
+				ldata[i] = ldata[i].encode("GBK")
+			except:
+				pass
+	order = "".join(lorder)
+	datastr = struct.pack(order,*ldata)
+	return datastr
+
+
 def filterCT(strin):
 	pattern = re.compile('\\033\[[0-9;]*[a-zA-Z]')
 	clean = pattern.sub('',strin)

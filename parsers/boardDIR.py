@@ -2,6 +2,7 @@ import struct
 import sys
 import os
 import functions
+import time
 
 boardFolder	=	"/home/bbs/bbshome/boards/"
 
@@ -28,3 +29,25 @@ def _getFileHeaders(boardName):
 		if endflag != -1:
 			thePost["filename"] = thePost["filename"][0:endflag]
 	return data
+
+def createPost(boardName,user,title,content):
+	f = open(boardFolder + boardName +"/.DIR","ab")
+	fileid = int(time.time())
+	while "M.%d.A"%fileid in [i["filename"] for i in getPostsList(boardName)]:
+		fileid +=1
+	filepath = "%s%s/%s/%s"%(boardFolder,boardName,str(fileid%500).zfill(3),"M."+str(fileid)+".A")
+	print filepath
+	f = open(filepath, "wb")
+	f.write(content)
+	f.close()
+	f = open(boardFolder + boardName +"/.DIR","ab")
+	ldata = ["M.%d.A"%fileid,"%s"%(user,user),0,title,0,"",fileid,fileid]
+	data = functions.packStruct(ldata,DIRstruct,256)
+	f.write(data)
+	f.close()
+	return dict(zip(order,ldata))
+
+
+
+if __name__ == "__main__":
+	print createPost("110","scaret","new Post","xixi")

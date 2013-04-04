@@ -44,7 +44,7 @@ def getPostNoCT(boardName,filename):
 	c = _getPostRaw(boardName,filename)
 	return functions.filterCT(c)
 
-	
+
 def _getFileMapNum(filename):
 	return int(filename[-5]) < 5 and filename[-5:-2] or str(int(filename[-5])-5)+filename[-4:-2]
 
