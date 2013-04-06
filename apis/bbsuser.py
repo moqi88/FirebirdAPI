@@ -1,25 +1,14 @@
-import sys,web,mimerender
+import sys,web
 import passwd,functions,PERM
 
-from mimerenderheader import *
+from includes import *
 
 class bbsuser:
-    @mimerender(default = 'json',
-        html = render_html,
-        xml  = render_xml,
-        json = render_json,
-        txt  = render_txt
-    )
-    def GET(self):
-        if checkPasswd() != True:
-            return {"message":errors["wrong_passwd"]}
-        elif "id" not in web.input():
-            return {"message":errors["require_id"]}
-        elif web.input()["id"] not in passwd.getUsers():
-            return {"message":errors["wrong_id"]}
+    def GET(self,userid,type="html"):
+        if userid not in passwd.getUsers():
+            return renderrouter({"message":errors["wrong_id"]})
         else:
-            userid = web.input()["id"]
-            return {"message":{
+            return renderrouter({"type":type,"message":{
 		"userid":userid,
 		"username":passwd.getAttr(userid,"username"),
 		"gender":passwd.getAttr(userid,"gender"),
@@ -32,6 +21,4 @@ class bbsuser:
 		"lastlogin":passwd.getAttr(userid,"lastlogin"),
 		"lastlogout":passwd.getAttr(userid,"lastlogout"),
 		"stay":passwd.getAttr(userid,"stay"),
-		"level":PERM.levels(passwd.getAttr(userid,"userlevel"))
-
-}}
+		"level":PERM.levels(passwd.getAttr(userid,"userlevel"))}})

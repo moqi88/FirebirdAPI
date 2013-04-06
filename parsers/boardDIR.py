@@ -30,7 +30,7 @@ def _getFileHeaders(boardName):
 			thePost["filename"] = thePost["filename"][0:endflag]
 	return data
 
-def createPost(boardName,user,title,content):
+def createPost(boardName,user,title,content,reid=False):
 	f = open(boardFolder + boardName +"/.DIR","ab")
 	fileid = int(time.time())
 	while "M.%d.A"%fileid in [i["filename"] for i in getPostsList(boardName)]:
@@ -41,7 +41,7 @@ def createPost(boardName,user,title,content):
 	f.write(content)
 	f.close()
 	f = open(boardFolder + boardName +"/.DIR","ab")
-	ldata = ["M.%d.A"%fileid,"%s"%(user,user),0,title,0,"",fileid,fileid]
+	ldata = ["M.%d.A"%fileid,"%s"%(user,user),0,title,0,"",fileid,reid and reid or fileid]
 	data = functions.packStruct(ldata,DIRstruct,256)
 	f.write(data)
 	f.close()
