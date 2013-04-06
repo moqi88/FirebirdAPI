@@ -4,11 +4,11 @@ import passwd,functions,PERM
 from includes import *
 
 class bbsuser:
-    def GET(self,userid,type="html"):
+    def GET(self,userid,reqtype="html"):
         if userid not in passwd.getUsers():
             return renderrouter({"message":errors["wrong_id"]})
         else:
-            return renderrouter({"type":type,"message":{
+            return renderrouter({"type":reqtype,"message":{
 		"userid":userid,
 		"username":passwd.getAttr(userid,"username"),
 		"gender":passwd.getAttr(userid,"gender"),

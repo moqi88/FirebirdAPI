@@ -4,7 +4,7 @@ import passwd,functions,PERM
 from includes import *
 
 class bbsallusers:
-    def GET(self,type="html"):
+    def GET(self,reqtype="html"):
         users = []
         userList = passwd.getUsers()
         for u in userList:
@@ -14,4 +14,4 @@ class bbsallusers:
                 "gender":passwd.getAttr(u,"gender"),
                 "lastlogin":passwd.getAttr(u,"lastlogin"),
                 "lastlogout":passwd.getAttr(u,"lastlogout")})
-        return renderrouter({"message":users,"type":type})
+        return renderrouter({"message":users,"type":reqtype})
