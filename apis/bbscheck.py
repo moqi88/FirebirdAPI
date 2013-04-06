@@ -1,15 +1,9 @@
-import sys,web,mimerender
+import sys,web
 import passwd,functions,PERM
 
-from mimerenderheader import *
+
 
 class bbscheck:
-    @mimerender(default = 'json',
-        html = render_html,
-        xml  = render_xml,
-        json = render_json,
-        txt  = render_txt
-    )
     def GET(self):
         if checkPasswd() != True:
             return {"message":errors["wrong_passwd"]}
