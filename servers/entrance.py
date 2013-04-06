@@ -20,7 +20,10 @@ from bbscheck import bbscheck
 urls = (
 	'/bbsuser/(.*)\.(.*)','bbsuser',
 	'/bbsuser/(.*)','bbsuser',
-	'/bbsallusers.*','bbsallusers',
+
+	'/bbsallusers\.(.*)','bbsallusers',
+	'/bbsallusers','bbsallusers',
+
 	'/bbscheck.*','bbscheck',
 	'(.*)', 'greet'
 )
